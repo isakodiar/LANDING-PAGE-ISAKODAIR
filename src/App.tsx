@@ -145,14 +145,14 @@ function SonyMusicProof({ navigate }: { navigate: (screen: Screen) => void }) {
           <p className="sony-proof__section-label">DETRÁS DE CADA RELEASE</p>
           <h3>PIEZAS QUE<br />CONECTAN CON<br />LA MÚSICA.</h3>
         </div>
-        <p>Una selección de trabajos de video vertical desarrollados para proyectos musicales, desde piezas promocionales hasta contenido de prelanzamiento.</p>
+        <p>Fotogramas de una selección de piezas de video vertical desarrolladas para proyectos musicales, desde promociones hasta contenido de prelanzamiento.</p>
       </div>
       <div className="sony-proof__grid">
         {sonyMusicProjects.map((project, index) => <article className="sony-project" key={project.title}>
           <div className="sony-project__media">
             <img src={project.image} alt={`Fotograma de ${project.title}, proyecto de ${project.artist}`} loading="lazy" />
             <span className="sony-project__index">0{index + 1}</span>
-            <span className="sony-project__play" aria-hidden="true">▶</span>
+            <span className="sony-project__format">9:16</span>
           </div>
           <div className="sony-project__copy">
             <span>{project.artist}</span>
@@ -162,7 +162,7 @@ function SonyMusicProof({ navigate }: { navigate: (screen: Screen) => void }) {
         </article>)}
       </div>
       <div className="sony-proof__bottom">
-        <p><strong>FORMATO VERTICAL · 9:16</strong><span>Edición y contenido para campañas musicales</span></p>
+        <p><strong>FOTOGRAMAS DE VIDEO · 9:16</strong><span>Edición y contenido para campañas musicales</span></p>
         <Action onClick={() => navigate({ kind: 'quote' })}>HABLEMOS DE TU PROYECTO</Action>
       </div>
     </div>
