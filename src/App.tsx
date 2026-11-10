@@ -325,8 +325,8 @@ function MusicQuotePage({ navigate }: { navigate: (screen: Screen) => void }) {
       </div>
     </section>
     <section className="music-section music-volume">
-      <div className="section-heading"><h2>VOLUMEN MENSUAL</h2><span>02 — 03</span></div>
-      <p className="music-muted">Selecciona el ritmo de publicación para un ciclo de cuatro semanas.</p>
+      <div className="section-heading"><h2>VOLUMEN DE EDICIÓN</h2><span>02 — 03</span></div>
+      <p className="music-muted">Selecciona el volumen de edición para un ciclo de cuatro semanas.</p>
       <div className="music-quantity">
         <button type="button" className={quantity === 12 ? 'selected' : ''} onClick={() => setQuantity(12)}><strong>12 VIDEOS</strong><small>3 por semana</small></button>
         <button type="button" className={quantity === 16 ? 'selected' : ''} onClick={() => setQuantity(16)}><strong>16 VIDEOS</strong><small>4 por semana</small></button>
@@ -345,14 +345,14 @@ function MusicQuotePage({ navigate }: { navigate: (screen: Screen) => void }) {
         <p><b>01 / MATERIAL</b><span>El grupo comparte videos originales, referencias y fechas importantes.</span></p>
         <p><b>02 / DIRECCIÓN CREATIVA</b><span>THE HEAT propone enfoques de edición respetando la identidad e imagen profesional del grupo.</span></p>
         <p><b>03 / EDICIÓN Y REVISIÓN</b><span>Se entrega una primera versión para comentarios dentro de las rondas incluidas.</span></p>
-        <p><b>04 / ENTREGA</b><span>Videos verticales listos para publicar en TikTok.</span></p>
+        <p><b>04 / ENTREGA</b><span>Archivos finales en formato vertical, listos para que el grupo los publique. El calendario puede combinar entregas individuales durante la semana y entregas por lotes.</span></p>
       </div>
       <div className="music-terms"><h3>CONSIDERACIONES</h3><ul>
-        <li>La propuesta considera exclusivamente edición; grabación, traslados y producción en sitio no están incluidos.</li>
+        <li>La propuesta considera exclusivamente edición y entrega de archivos finales; grabación, traslados, producción en sitio, publicación y administración de redes no están incluidos.</li>
         <li>El grupo proporciona los archivos originales en calidad suficiente y confirma derechos de uso de música e imagen.</li>
         <li>El volumen corresponde a un ciclo de cuatro semanas; piezas adicionales se cotizan al precio unitario seleccionado.</li>
         <li>Animación avanzada, efectos complejos, búsqueda de material externo y cambios de concepto posteriores a la aprobación se cotizan por separado.</li>
-        <li>La fecha de inicio y el calendario de entregas se acuerdan al aprobar la propuesta y recibir el material.</li>
+        <li>La fecha de inicio y el calendario de entregas (individuales durante la semana, por lotes o combinados) se acuerdan al aprobar la propuesta y recibir el material.</li>
       </ul></div>
     </section>
     <div className="music-close"><p>CONTENIDO CON IDENTIDAD.<br /><em>EDICIÓN CON INTENCIÓN.</em></p><button className="action" onClick={contact}>HABLEMOS DEL PROYECTO <ArrowUpRight size={22} aria-hidden /></button></div>
