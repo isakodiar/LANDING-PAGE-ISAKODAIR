@@ -3,7 +3,7 @@ import { ArrowLeft, ArrowUpRight, Check, Moon, Sun } from 'lucide-react';
 import { getService, services, whatsappUrl, type Service, type ServiceId } from './data';
 
 type Theme = 'light' | 'dark';
-type Screen = { kind: 'home' } | { kind: 'service'; id: ServiceId } | { kind: 'quote'; id?: ServiceId; merchandiseKind?: MerchKind };
+type Screen = { kind: 'home' } | { kind: 'service'; id: ServiceId } | { kind: 'quote'; id?: ServiceId; merchandiseKind?: MerchKind } | { kind: 'musicQuote' };
 type MerchKind = 'custom' | 'quaids';
 
 function themePreference(): Theme {
@@ -18,6 +18,7 @@ function parseScreen(): Screen {
   const hash = window.location.hash.replace(/^#\/?/, '');
   const [part, id] = hash.split('/');
   if (part === 'servicio' && getService(id)) return { kind: 'service', id: id as ServiceId };
+  if (part === 'propuesta-musical') return { kind: 'musicQuote' };
   if (part === 'cotizar') {
     const params = new URLSearchParams(id ?? '');
     const service = params.get('servicio');
@@ -33,6 +34,7 @@ function parseScreen(): Screen {
 
 function screenUrl(screen: Screen): string {
   if (screen.kind === 'home') return '#/';
+  if (screen.kind === 'musicQuote') return '#/propuesta-musical';
   if (screen.kind === 'service') return `#/servicio/${screen.id}`;
   const params = new URLSearchParams();
   if (screen.id) params.set('servicio', screen.id);
@@ -79,6 +81,7 @@ function App() {
         {screen.kind === 'home' && <Home navigate={navigate} />}
         {screen.kind === 'service' && selected && <ServicePage service={selected} navigate={navigate} />}
         {screen.kind === 'quote' && <QuotePage selected={selected} merchandiseKind={screen.merchandiseKind} navigate={navigate} />}
+        {screen.kind === 'musicQuote' && <MusicQuotePage navigate={navigate} />}
       </main>
       <footer className="site-footer container">
         <span>© {new Date().getFullYear()} ISAK ODAIR</span>
@@ -216,6 +219,96 @@ function QuotePage({ selected, merchandiseKind, navigate }: { selected?: Service
       <button className="action action-submit" type="submit">CONTINUAR POR WHATSAPP <ArrowUpRight size={22} strokeWidth={2.4} aria-hidden /></button>
       <p className="privacy-note">Se abrirá WhatsApp con tu solicitud redactada para que puedas revisarla antes de enviarla. No se envía automáticamente.</p>
     </form>
+  </div>;
+}
+
+
+type MusicTier = 'essential' | 'creative' | 'professional';
+function MusicQuotePage({ navigate }: { navigate: (screen: Screen) => void }) {
+  const [tier, setTier] = useState<MusicTier>('creative');
+  const [quantity, setQuantity] = useState<12 | 16>(12);
+  const tiers = {
+    essential: { name: 'EDICIÓN ESENCIAL', unit: 300, detail: 'Cortes limpios, ritmo, música, formato vertical y ajustes básicos de imagen.', includes: ['Edición de material proporcionado', 'Duración final de 15–30 segundos', '1 ronda de ajustes por video', 'Exportación 9:16 lista para TikTok'] },
+    creative: { name: 'EDICIÓN CREATIVA', unit: 700, detail: 'Edición con criterio creativo para convertir el material del grupo en piezas más atractivas y profesionales.', includes: ['Selección de momentos y construcción de hook', 'Ritmo, música y diseño sonoro', 'Subtítulos y tratamiento de color básico', 'Propuestas creativas para cada entrega', '1 ronda de ajustes por video'] },
+    professional: { name: 'EDICIÓN PROFESIONAL', unit: 1200, detail: 'Mayor elaboración narrativa y visual para piezas prioritarias o lanzamientos especiales.', includes: ['Todo lo incluido en Edición Creativa', 'Edición narrativa y tratamiento visual avanzado', 'Diseño de textos y recursos gráficos personalizados', '2 rondas de ajustes por video'] },
+  } as const;
+  const chosen = tiers[tier];
+  const subtotal = chosen.unit * quantity;
+  const tax = Math.round(subtotal * 0.16);
+  const total = subtotal + tax;
+  const money = (n: number) => n.toLocaleString('es-MX', { style: 'currency', currency: 'MXN', maximumFractionDigits: 0 });
+  function contact() {
+    const msg = [
+      '¡Hola, Isak! Revisé la propuesta de edición TikTok para nuestro grupo musical.',
+      '',
+      'Paquete: ' + chosen.name,
+      'Volumen: ' + quantity + ' videos por ciclo de 4 semanas',
+      'Precio por video (sin IVA): ' + money(chosen.unit),
+      'Subtotal: ' + money(subtotal),
+      'IVA (16%): ' + money(tax),
+      'Total: ' + money(total),
+      '',
+      'Me gustaría revisar los siguientes pasos y compartir referencias del grupo.'
+    ].join('\n');
+    window.location.assign('https://wa.me/524494685875?text=' + encodeURIComponent(msg));
+  }
+  return <div className="music-quote">
+    <button className="back-link" onClick={() => navigate({ kind: 'home' })}><ArrowLeft size={16} aria-hidden /> VOLVER A ISAK ODAIR</button>
+    <p className="section-code">THE HEAT / PROPUESTA 001</p>
+    <section className="music-hero">
+      <p className="eyebrow">EDICIÓN AUDIOVISUAL · TIKTOK</p>
+      <h1>SU MÚSICA.<br /><em>EN MOVIMIENTO.</em></h1>
+      <p>Contenido corto con intención creativa, ritmo e identidad profesional para conectar con nuevas audiencias.</p>
+      <div className="music-meta"><span>15–30 SEGUNDOS</span><span>FORMATO 9:16</span><span>MATERIAL PROPORCIONADO</span></div>
+    </section>
+    <section className="music-section">
+      <div className="section-heading"><h2>ELIGE EL ALCANCE</h2><span>01 — 03</span></div>
+      <p className="music-muted">Tres niveles de edición según la elaboración creativa que necesiten sus videos.</p>
+      <div className="music-tiers">
+        {(['essential','creative','professional'] as MusicTier[]).map((key) => <button key={key} type="button" className={`music-tier ${tier === key ? 'music-tier--active' : ''}`} onClick={() => setTier(key)} aria-pressed={tier === key}>
+          <span className="music-tier-top"><strong>{tiers[key].name}</strong>{tier === key && <Check size={17} aria-hidden />}</span>
+          <span className="music-tier-price">{money(tiers[key].unit)} <small>/ VIDEO + IVA</small></span>
+          <span className="music-tier-detail">{tiers[key].detail}</span>
+        </button>)}
+      </div>
+      <div className="music-includes">
+        <h3>QUÉ INCLUYE {chosen.name}</h3>
+        <ul>{chosen.includes.map((item) => <li key={item}><Check size={15} aria-hidden />{item}</li>)}</ul>
+      </div>
+    </section>
+    <section className="music-section music-volume">
+      <div className="section-heading"><h2>VOLUMEN MENSUAL</h2><span>02 — 03</span></div>
+      <p className="music-muted">Selecciona el ritmo de publicación para un ciclo de cuatro semanas.</p>
+      <div className="music-quantity">
+        <button type="button" className={quantity === 12 ? 'selected' : ''} onClick={() => setQuantity(12)}><strong>12 VIDEOS</strong><small>3 por semana</small></button>
+        <button type="button" className={quantity === 16 ? 'selected' : ''} onClick={() => setQuantity(16)}><strong>16 VIDEOS</strong><small>4 por semana</small></button>
+      </div>
+      <div className="music-total">
+        <div className="music-total-row"><span>{chosen.name} · {quantity} piezas</span><strong>{money(subtotal)}</strong></div>
+        <div className="music-total-row"><span>IVA (16%)</span><strong>{money(tax)}</strong></div>
+        <div className="music-total-final"><span>INVERSIÓN TOTAL / 4 SEMANAS</span><strong>{money(total)} <small>MXN</small></strong></div>
+        <p>Precios expresados en MXN. El IVA se desglosa por separado.</p>
+      </div>
+      <button className="action action-submit" type="button" onClick={contact}>CONTINUAR POR WHATSAPP <ArrowUpRight size={22} aria-hidden /></button>
+    </section>
+    <section className="music-section">
+      <div className="section-heading"><h2>FORMA DE TRABAJO</h2><span>03 — 03</span></div>
+      <div className="music-process">
+        <p><b>01 / MATERIAL</b><span>El grupo comparte videos originales, referencias y fechas importantes.</span></p>
+        <p><b>02 / DIRECCIÓN CREATIVA</b><span>THE HEAT propone enfoques de edición respetando la identidad e imagen profesional del grupo.</span></p>
+        <p><b>03 / EDICIÓN Y REVISIÓN</b><span>Se entrega una primera versión para comentarios dentro de las rondas incluidas.</span></p>
+        <p><b>04 / ENTREGA</b><span>Videos verticales listos para publicar en TikTok.</span></p>
+      </div>
+      <div className="music-terms"><h3>CONSIDERACIONES</h3><ul>
+        <li>La propuesta considera exclusivamente edición; grabación, traslados y producción en sitio no están incluidos.</li>
+        <li>El grupo proporciona los archivos originales en calidad suficiente y confirma derechos de uso de música e imagen.</li>
+        <li>El volumen corresponde a un ciclo de cuatro semanas; piezas adicionales se cotizan al precio unitario seleccionado.</li>
+        <li>Animación avanzada, efectos complejos, búsqueda de material externo y cambios de concepto posteriores a la aprobación se cotizan por separado.</li>
+        <li>La fecha de inicio y el calendario de entregas se acuerdan al aprobar la propuesta y recibir el material.</li>
+      </ul></div>
+    </section>
+    <div className="music-close"><p>CONTENIDO CON IDENTIDAD.<br /><em>EDICIÓN CON INTENCIÓN.</em></p><button className="action" onClick={contact}>HABLEMOS DEL PROYECTO <ArrowUpRight size={22} aria-hidden /></button></div>
+    <p className="music-validity">Propuesta orientativa sujeta a confirmación de estilo, complejidad del material y volumen definitivo. Vigencia: 15 días naturales desde su presentación.</p>
   </div>;
 }
 
