@@ -173,3 +173,48 @@ h1 em { color: var(--red); font-style: normal; }
 .music-close p { font-size: clamp(22px, 6vw, 30px); }
 .music-validity { color: var(--muted); font-size: 9px; line-height: 1.5; margin-top: 18px; }
 @media(min-width: 700px) { .music-hero { padding: 28px; } .music-hero h1 { font-size: 44px; } }
+
+
+/* Sony Music proof section — editorial portfolio treatment */
+.sony-proof { margin-top: 34px; overflow: hidden; border-radius: 18px; background: #0c0c0d; color: #fff; }
+.sony-proof__hero { padding: 19px 18px 22px; background: radial-gradient(circle at 22% 20%, rgba(255, 91, 31, .96), transparent 46%), linear-gradient(118deg, #f24b20 0%, #a92727 58%, #34151d 100%); }
+.sony-proof__top { display: flex; justify-content: space-between; gap: 10px; font-size: 8px; font-weight: 800; letter-spacing: .65px; text-transform: uppercase; opacity: .92; margin-bottom: 32px; }
+.sony-proof__eyebrow, .sony-proof__section-label { font-size: 9px; font-weight: 800; letter-spacing: .7px; margin-bottom: 10px; }
+.sony-proof__hero h2 { font-family: 'Encode Sans Expanded', Arial, sans-serif; font-size: clamp(27px, 7.6vw, 40px); line-height: 1.02; letter-spacing: -1.3px; margin: 0 0 12px; }
+.sony-proof__hero h2 em { color: #ffd0b8; font-style: normal; }
+.sony-proof__hero > p:last-child { font-size: 11px; line-height: 1.55; max-width: 360px; margin: 0; color: rgba(255,255,255,.88); }
+.sony-proof__brandbar { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 16px 18px; background: #151516; border-bottom: 1px solid #29292b; }
+.sony-proof__brandbar span { max-width: 135px; color: #c7c4c4; font-size: 8px; line-height: 1.35; font-weight: 700; letter-spacing: .45px; }
+.sony-proof__brandbar strong { font-family: 'Encode Sans Expanded', Arial, sans-serif; font-size: clamp(17px, 4.5vw, 23px); letter-spacing: -1px; white-space: nowrap; }
+.sony-proof__body { padding: 20px 18px 20px; }
+.sony-proof__intro { display: grid; gap: 8px; margin-bottom: 17px; }
+.sony-proof__section-label { color: #ff6b38; margin: 0 0 8px; }
+.sony-proof__intro h3 { font-family: 'Encode Sans Expanded', Arial, sans-serif; font-size: clamp(19px, 5.5vw, 27px); line-height: 1.08; letter-spacing: -.8px; margin: 0; }
+.sony-proof__intro > p { color: #b8b5b5; font-size: 10px; line-height: 1.55; margin: 0; }
+.sony-proof__grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+.sony-project { min-width: 0; }
+.sony-project__media { position: relative; overflow: hidden; aspect-ratio: 3 / 4.4; border-radius: 9px; background: #222; }
+.sony-project__media::after { content: ''; position: absolute; inset: 35% 0 0; background: linear-gradient(transparent, rgba(0,0,0,.42)); pointer-events: none; }
+.sony-project__media img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.sony-project__index { position: absolute; z-index: 1; top: 7px; left: 7px; padding: 4px 5px; border-radius: 4px; background: rgba(0,0,0,.55); color: white; font-size: 8px; font-weight: 800; }
+.sony-project__play { position: absolute; z-index: 1; right: 8px; bottom: 8px; display: grid; place-items: center; width: 24px; height: 24px; border: 1px solid rgba(255,255,255,.65); border-radius: 50%; color: white; font-size: 8px; padding-left: 2px; background: rgba(0,0,0,.28); }
+.sony-project__copy { display: grid; gap: 4px; padding: 9px 1px 0; }
+.sony-project__copy span { color: #ff8050; font-size: 8px; font-weight: 800; letter-spacing: .3px; line-height: 1.3; }
+.sony-project__copy strong { font-size: 10px; line-height: 1.25; }
+.sony-project__copy small { color: #a7a3a3; font-size: 7px; line-height: 1.35; }
+.sony-proof__bottom { display: grid; gap: 14px; margin-top: 20px; padding-top: 16px; border-top: 1px solid #303032; }
+.sony-proof__bottom > p { display: grid; gap: 4px; margin: 0; }
+.sony-proof__bottom > p strong { font-size: 8px; letter-spacing: .5px; }
+.sony-proof__bottom > p span { color: #aaa6a6; font-size: 9px; }
+.sony-proof .action { background: #f25322; }
+@media(min-width: 540px) {
+  .sony-proof__hero { padding: 24px 24px 26px; }
+  .sony-proof__brandbar { padding: 18px 24px; }
+  .sony-proof__body { padding: 24px; }
+  .sony-proof__intro { grid-template-columns: 1fr 1fr; align-items: end; gap: 18px; }
+  .sony-proof__grid { gap: 12px; }
+  .sony-project__copy span { font-size: 9px; }
+  .sony-project__copy strong { font-size: 12px; }
+  .sony-project__copy small { font-size: 8px; }
+  .sony-proof__bottom { grid-template-columns: 1fr 1fr; align-items: center; }
+}
