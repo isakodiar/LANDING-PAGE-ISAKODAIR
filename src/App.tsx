@@ -1,6 +1,7 @@
 import { useEffect, useState, type FormEvent } from 'react';
 import { ArrowLeft, ArrowUpRight, Check, Moon, Sun } from 'lucide-react';
 import { getService, services, whatsappUrl, type Service, type ServiceId } from './data';
+import { sonyMusicProjects } from './sonyMusicPortfolio';
 
 type Theme = 'light' | 'dark';
 type Screen = { kind: 'home' } | { kind: 'service'; id: ServiceId } | { kind: 'quote'; id?: ServiceId; merchandiseKind?: MerchKind } | { kind: 'musicQuote' };
@@ -113,12 +114,59 @@ function Home({ navigate }: { navigate: (screen: Screen) => void }) {
         </button>)}
       </div>
     </section>
+    <SonyMusicProof navigate={navigate} />
     <section className="footer-question">
       <h2>¿UN PROYECTO QUE COMBINA SERVICIOS?</h2>
       <p>Podemos definir el alcance directamente por WhatsApp.</p>
       <Action onClick={() => navigate({ kind: 'quote' })}>HABLEMOS DE TU PROYECTO</Action>
     </section>
   </div>;
+}
+
+
+function SonyMusicProof({ navigate }: { navigate: (screen: Screen) => void }) {
+  return <section className="sony-proof" aria-labelledby="sony-proof-title">
+    <div className="sony-proof__hero">
+      <div className="sony-proof__top">
+        <span>PROYECTOS SELECCIONADOS</span>
+        <span>THE HEAT / MUSIC</span>
+      </div>
+      <p className="sony-proof__eyebrow">ESTRATEGIA VISUAL · EDICIÓN AUDIOVISUAL</p>
+      <h2 id="sony-proof-title">EL LANZAMIENTO<br />TAMBIÉN <em>SE VE.</em></h2>
+      <p>Contenido audiovisual pensado para acompañar la identidad de cada artista y darle forma visual a sus lanzamientos.</p>
+    </div>
+    <div className="sony-proof__brandbar">
+      <span>EXPERIENCIA EN PROYECTOS MUSICALES</span>
+      <strong>SONY MUSIC</strong>
+    </div>
+    <div className="sony-proof__body">
+      <div className="sony-proof__intro">
+        <div>
+          <p className="sony-proof__section-label">DETRÁS DE CADA RELEASE</p>
+          <h3>PIEZAS QUE<br />CONECTAN CON<br />LA MÚSICA.</h3>
+        </div>
+        <p>Una selección de trabajos de video vertical desarrollados para proyectos musicales, desde piezas promocionales hasta contenido de prelanzamiento.</p>
+      </div>
+      <div className="sony-proof__grid">
+        {sonyMusicProjects.map((project, index) => <article className="sony-project" key={project.title}>
+          <div className="sony-project__media">
+            <img src={project.image} alt={`Fotograma de ${project.title}, proyecto de ${project.artist}`} loading="lazy" />
+            <span className="sony-project__index">0{index + 1}</span>
+            <span className="sony-project__play" aria-hidden="true">▶</span>
+          </div>
+          <div className="sony-project__copy">
+            <span>{project.artist}</span>
+            <strong>{project.title}</strong>
+            <small>{project.category}</small>
+          </div>
+        </article>)}
+      </div>
+      <div className="sony-proof__bottom">
+        <p><strong>FORMATO VERTICAL · 9:16</strong><span>Edición y contenido para campañas musicales</span></p>
+        <Action onClick={() => navigate({ kind: 'quote' })}>HABLEMOS DE TU PROYECTO</Action>
+      </div>
+    </div>
+  </section>;
 }
 
 function ServicePage({ service, navigate }: { service: Service; navigate: (screen: Screen) => void }) {
