@@ -23,6 +23,10 @@
     .topbar{height:76px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line)}
     .brand{font-family:"Space Grotesk",sans-serif;font-weight:700;letter-spacing:-1px;font-size:19px}
     .brand span{color:var(--orange)}
+    .hero-social{display:inline-flex;align-items:center;gap:8px;margin:18px 0 0 14px;color:#fff;font-size:12px;font-weight:700;letter-spacing:.04em}
+    .hero-social:hover{color:var(--orange)}
+    .hero-portrait{position:absolute;z-index:1;right:5%;top:50%;transform:translateY(-50%);width:clamp(180px,24vw,290px);aspect-ratio:1/1.08;object-fit:cover;object-position:center 22%;border-radius:48% 48% 18px 18px;filter:saturate(.85);box-shadow:0 24px 80px #0009;border:1px solid #ffffff30}
+    @media(max-width:760px){.hero-portrait{position:relative;display:block;top:auto;right:auto;transform:none;width:min(48vw,190px);margin:26px 0 0 auto}.hero-content{max-width:100%}.hero-social{margin-left:0;display:flex}}
     .nav{display:flex;align-items:center;gap:28px;font-size:11px;color:#c5bbb5}
     .nav a:hover{color:white}
     .nav .nav-cta{padding:11px 17px;border-radius:30px;background:#f4eee9;color:#171211;font-weight:800}
@@ -121,7 +125,7 @@
 </head>
 <body>
   <header class="wrap topbar">
-    <a class="brand" href="#inicio">THE <span>HEAT</span> / MUSIC</a>
+    <a class="brand" href="#inicio">ISAK <span>ODAIR</span></a>
     <nav class="nav" aria-label="Navegación principal">
       <a href="#portafolio">Portafolio</a><a href="#servicio">Servicio</a><a href="#cotizacion">Cotización</a>
       <a class="nav-cta" href="#cotizacion">Ver propuesta ↗</a>
@@ -135,7 +139,8 @@
         <p class="eyebrow">EDICIÓN AUDIOVISUAL PARA ARTISTAS</p>
         <h1>TU MÚSICA.<br><em>EN MOVIMIENTO.</em></h1>
         <p class="hero-copy">Convertimos el material de tu proyecto musical en videos cortos con intención creativa, ritmo e identidad visual. Contenido listo para conectar con nuevas audiencias.</p>
-        <div class="hero-actions"><a class="button button-light" href="#portafolio">VER PROYECTOS <span>↘</span></a><a class="button" href="#cotizacion">CONSULTAR INVERSIÓN <span>↗</span></a></div>
+        <div class="hero-actions"><a class="button button-light" href="#portafolio">VER PROYECTOS <span>↘</span></a><a class="button" href="#cotizacion">CONSULTAR INVERSIÓN <span>↗</span></a>
+          <a class="hero-social" href="https://www.instagram.com/isakodair/" target="_blank" rel="noopener">@ISAKODAIR ↗</a></div>
       </div>
       <div class="hero-facts">
         <div><b>15–30 s</b><span>Duración por pieza</span></div>
@@ -166,6 +171,21 @@
           <div class="video-frame"><video controls playsinline preload="metadata" controlslist="nodownload" aria-label="Dan García — Dreambaby, pre-save"><source src="https://res.cloudinary.com/jfum298a/video/upload/v1794272484/dan-garcia-dreambaby-presave.mp4" type="video/mp4">Tu navegador no admite la reproducción de video.</video></div>
           <div class="video-label"><span>03 / PRE-SAVE</span><span>9:16</span></div>
           <h3>Dan García — Dreambaby</h3><p>Contenido de prelanzamiento y pre-save.</p>
+        <article class="video-card">
+          <div class="video-frame"><video controls playsinline preload="metadata" controlslist="nodownload" aria-label="Marcos Villalobos — Summerlover, ya disponible"><source src="https://res.cloudinary.com/jfum298a/video/upload/v1794273616/marcos-villalobos-summerlover.mp4" type="video/mp4">Tu navegador no admite la reproducción de video.</video></div>
+          <div class="video-label"><span>04 / LANZAMIENTO</span><span>4:5</span></div>
+          <h3>Marcos Villalobos — Summerlover</h3><p>Video de lanzamiento para anunciar la disponibilidad del sencillo.</p>
+        </article>
+        <article class="video-card">
+          <div class="video-frame"><video controls playsinline preload="metadata" controlslist="nodownload" aria-label="El Flaco — Tequiña y Guaro, countdown"><source src="https://res.cloudinary.com/jfum298a/video/upload/v1794273654/el-flaco-album-tequina-y-guaro-countdown.mp4" type="video/mp4">Tu navegador no admite la reproducción de video.</video></div>
+          <div class="video-label"><span>05 / COUNTDOWN</span><span>9:16</span></div>
+          <h3>El Flaco — Tequiña y Guaro</h3><p>Contenido de cuenta regresiva para lanzamiento de álbum.</p>
+        </article>
+        <article class="video-card">
+          <div class="video-frame"><video controls playsinline preload="metadata" controlslist="nodownload" aria-label="Gera MX — Mira Cómo Me Tienes"><source src="https://res.cloudinary.com/jfum298a/video/upload/v1794273627/gera-mx-album-mira-como-me-tienes.mp4" type="video/mp4">Tu navegador no admite la reproducción de video.</video></div>
+          <div class="video-label"><span>06 / PROMOCIONAL</span><span>9:16</span></div>
+          <h3>Gera MX — Mira Cómo Me Tienes</h3><p>Pieza promocional para campaña musical.</p>
+        </article>
         </article>
       </div>
       <p class="proof-note">Proyectos seleccionados como muestra de experiencia audiovisual. Los créditos y nombres se presentan como referencia de portafolio, no como una declaración de patrocinio o respaldo comercial.</p>
