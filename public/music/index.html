@@ -208,16 +208,16 @@
           <div>
             <div class="tier-list" role="group" aria-label="Nivel de edición">
               <button class="tier" type="button" data-tier="essential" aria-pressed="false">
-                <span class="tier-top"><span class="tier-name">01 / ESENCIAL</span><span class="tier-price">$300 <small>/ VIDEO + IVA</small></span></span>
+                <span class="tier-top"><span class="tier-name">01 / ESENCIAL</span><span class="tier-price"><del class="old-price">$300</del><span id="price-essential">$285</span><small>/ VIDEO + IVA</small></span></span>
                 <span class="tier-desc">Edición sencilla con cortes limpios, ritmo, música, formato vertical y ajustes básicos de imagen.</span>
               </button>
               <button class="tier" type="button" data-tier="creative" aria-pressed="true">
-                <span class="tier-top"><span class="tier-name">02 / CREATIVA</span><span class="tier-price">$700 <small>/ VIDEO + IVA</small></span></span>
+                <span class="tier-top"><span class="tier-name">02 / CREATIVA</span><span class="tier-price"><del class="old-price">$700</del><span id="price-creative">$665</span><small>/ VIDEO + IVA</small></span></span>
                 <span class="tier-tag">RECOMENDADA PARA ESTE PROYECTO</span>
                 <span class="tier-desc">Edición con criterio creativo, selección de momentos, hooks, subtítulos y propuestas para cada entrega.</span>
               </button>
               <button class="tier" type="button" data-tier="professional" aria-pressed="false">
-                <span class="tier-top"><span class="tier-name">03 / PROFESIONAL</span><span class="tier-price">$1,200 <small>/ VIDEO + IVA</small></span></span>
+                <span class="tier-top"><span class="tier-name">03 / PROFESIONAL</span><span class="tier-price"><del class="old-price">$1,200</del><span id="price-professional">$1,140</span><small>/ VIDEO + IVA</small></span></span>
                 <span class="tier-desc">Mayor elaboración narrativa y visual para piezas prioritarias o lanzamientos especiales.</span>
               </button>
             </div>
@@ -227,15 +227,18 @@
             <p class="kicker">CALCULA TU INVERSIÓN</p>
             <h3>Volumen por ciclo</h3>
             <div class="quantity" role="group" aria-label="Cantidad de videos">
-              <button type="button" data-quantity="12" aria-pressed="true"><b>12 VIDEOS</b><span>3 por semana</span></button>
-              <button type="button" data-quantity="16" aria-pressed="false"><b>16 VIDEOS</b><span>4 por semana</span></button>
+              <button type="button" data-quantity="12" aria-pressed="true"><b>12 VIDEOS · 5% OFF</b><span>3 por semana · ahorro por volumen</span></button>
+              <button type="button" data-quantity="16" aria-pressed="false"><b>16 VIDEOS · 10% OFF</b><span>4 por semana · mayor ahorro</span></button>
             </div>
             <div class="totals">
-              <div class="total-row"><span id="subtotal-label">Edición creativa · 12 piezas</span><strong id="subtotal">$8,400</strong></div>
-              <div class="total-row"><span>IVA (16%)</span><strong id="tax">$1,344</strong></div>
-              <div class="total-final"><span>INVERSIÓN TOTAL / 4 SEMANAS</span><strong id="total">$9,744 <small>MXN</small></strong></div>
+              <div class="total-row"><span>Precio regular del paquete</span><strong id="regular">$8,400</strong></div>
+              <div class="total-row discount-row"><span id="discount-label">Descuento por volumen · 5%</span><strong id="discount">−$420</strong></div>
+              <div class="total-row"><span id="subtotal-label">Subtotal con descuento</span><strong id="subtotal">$7,980</strong></div>
+              <div class="total-row"><span>IVA (16%)</span><strong id="tax">$1,276.80</strong></div>
+              <div class="total-final"><span>INVERSIÓN TOTAL / 4 SEMANAS</span><strong id="total">$9,256.80 <small>MXN</small></strong></div>
             </div>
-            <p class="tax-note">Precios en pesos mexicanos. Importes antes de IVA; el impuesto se desglosa por separado. No se aplica descuento por volumen.</p>
+            <p class="discount-note" id="saving-note">Ahorras $420 MXN antes de IVA frente al precio regular.</p>
+            <p class="tax-note">Precios en pesos mexicanos. El descuento se aplica al contratar el volumen completo del ciclo de cuatro semanas. IVA desglosado por separado.</p>
             <a class="button" id="whatsapp-cta" href="https://wa.me/524494685875" target="_blank" rel="noopener">REVISAR PROPUESTA ↗</a>
           </aside>
         </div>
@@ -246,7 +249,8 @@
             <li>No incluye grabación, producción presencial, traslados, publicación, administración de TikTok ni gestión de redes.</li>
             <li>El grupo proporciona los archivos originales en calidad suficiente y confirma los derechos de uso de música e imagen.</li>
             <li>El nivel Esencial incluye 1 ronda de ajustes por video; el Creativo incluye 1 ronda; el Profesional incluye 2 rondas.</li>
-            <li>El volumen corresponde a un ciclo de cuatro semanas. Las piezas adicionales se cotizan al precio unitario del nivel seleccionado.</li>
+            <li>El descuento por volumen es de 5% al contratar 12 videos o 10% al contratar 16 videos por ciclo de cuatro semanas; aplica sobre el subtotal del paquete y no se acumula con otras promociones.</li>
+            <li>El volumen corresponde a un ciclo de cuatro semanas. Las piezas adicionales se cotizan al precio unitario regular del nivel seleccionado.</li>
             <li>Animación avanzada, efectos complejos, búsqueda de material externo y cambios de concepto posteriores a la aprobación se cotizan por separado.</li>
             <li>El calendario puede combinar entregas individuales distribuidas durante la semana y entregas por lotes, acordadas al iniciar el ciclo.</li>
             <li>La fecha de inicio se confirma al aprobar la propuesta y recibir el material. Vigencia de esta propuesta: 15 días naturales desde su presentación.</li>
@@ -275,24 +279,38 @@
         professional:{name:"EDICIÓN PROFESIONAL",unit:1200,includes:["Todo lo incluido en Edición Creativa","Edición narrativa y tratamiento visual avanzado","Diseño de textos y recursos gráficos personalizados","2 rondas de ajustes por video"]}
       };
       let selected="creative",quantity=12;
-      const money=n=>new Intl.NumberFormat("es-MX",{style:"currency",currency:"MXN",maximumFractionDigits:0}).format(n);
+      const money=n=>new Intl.NumberFormat("es-MX",{style:"currency",currency:"MXN",minimumFractionDigits:0,maximumFractionDigits:2}).format(n);
       function update(){
-        const item=tiers[selected],subtotal=item.unit*quantity,tax=Math.round(subtotal*.16),total=subtotal+tax;
+        const item=tiers[selected],rate=quantity===12?.05:.10;
+        const regular=item.unit*quantity,discount=Math.round(regular*rate*100)/100;
+        const subtotal=regular-discount,tax=Math.round(subtotal*.16*100)/100,total=subtotal+tax;
+        const discountedUnit=item.unit*(1-rate);
         document.querySelectorAll("[data-tier]").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.tier===selected)));
         document.querySelectorAll("[data-quantity]").forEach(b=>b.setAttribute("aria-pressed",String(Number(b.dataset.quantity)===quantity)));
         document.getElementById("includes-title").textContent="QUÉ INCLUYE "+item.name;
         document.getElementById("includes-list").innerHTML=item.includes.map(x=>"<li>"+x+"</li>").join("");
-        document.getElementById("subtotal-label").textContent=item.name+" · "+quantity+" piezas";
+        document.getElementById("price-essential").textContent=money(300*(1-rate));
+        document.getElementById("price-creative").textContent=money(700*(1-rate));
+        document.getElementById("price-professional").textContent=money(1200*(1-rate));
+        document.getElementById("regular").textContent=money(regular);
+        document.getElementById("discount-label").textContent="Descuento por volumen · "+Math.round(rate*100)+"%";
+        document.getElementById("discount").textContent="−"+money(discount);
+        document.getElementById("subtotal-label").textContent="Subtotal con descuento · "+quantity+" piezas";
         document.getElementById("subtotal").textContent=money(subtotal);
         document.getElementById("tax").textContent=money(tax);
         document.getElementById("total").innerHTML=money(total)+" <small>MXN</small>";
+        document.getElementById("saving-note").textContent="Ahorras "+money(discount)+" MXN antes de IVA frente al precio regular.";
         const message=[
           "¡Hola, Isak! Revisé la propuesta de ISAK ODAIR para edición de video de nuestro proyecto musical.",
           "",
           "Paquete: "+item.name,
           "Volumen: "+quantity+" videos por ciclo de 4 semanas",
-          "Precio por video (sin IVA): "+money(item.unit),
-          "Subtotal: "+money(subtotal),
+          "Descuento por volumen: "+Math.round(rate*100)+"%",
+          "Precio regular por video (sin IVA): "+money(item.unit),
+          "Precio por video con descuento: "+money(discountedUnit),
+          "Subtotal regular: "+money(regular),
+          "Descuento: −"+money(discount),
+          "Subtotal con descuento: "+money(subtotal),
           "IVA (16%): "+money(tax),
           "Total: "+money(total),
           "",
